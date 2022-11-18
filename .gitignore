@@ -1,0 +1,15 @@
+.DS_Store
+.cabal-sandbox
+.ghc.environment*
+.stack-work
+cabal.project.freeze
+cabal.sandbox.config
+dist-newstyle
+dist/
+logs/
+stack.yaml.lock
+result*
+build*
+hie.yaml
+*coins.conf
+*dummy*.conf

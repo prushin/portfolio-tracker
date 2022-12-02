@@ -39,7 +39,7 @@ default-extensions:
     #- AllowAmbiguousTypes
 
 ghc-options:
-  - -Weverything
+  #  - -Weverything
   - -Werror
   - -Wno-missing-exported-signatures # missing-exported-signatures turns off the more strict -Wmissing-signatures. See https://ghc.haskell.org/trac/ghc/ticket/14794#ticket
   - -Wno-missing-import-lists # Requires explicit imports of _every_ function (e.g. ‘$’); too strict
@@ -69,17 +69,17 @@ ghc-options:
 #- -fenable-th-splice-warnings
 #- -fprint-potential-instances
 
-library:
-  source-dirs:
-  - src
-  ghc-options:
-  - -fwarn-tabs
-  dependencies:
-  - base ^>=4.15.1.0
-  - bytestring
-  - http-types
-  - text
-  - http2
+#library:
+#  source-dirs:
+#  - src
+#  ghc-options:
+#  - -fwarn-tabs
+#  dependencies:
+#  - base ^>=4.15.1.0
+#  - bytestring
+#  - text
+#  - http2
+#  - network-run
 
 executables:
   portfolio-tracker-exe:
@@ -90,6 +90,7 @@ executables:
     - http-types
     - text
     - http2
+    - network-run
     source-dirs:
     - app
     - src

@@ -89,8 +89,8 @@ executables:
     - bytestring
     - http-types
     - text
-    - http2
-    - network-run
+    - http-client
+    - http-client-tls
     source-dirs:
     - app
     - src

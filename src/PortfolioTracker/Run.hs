@@ -1,10 +1,12 @@
 module PortfolioTracker.Run (main) where
 
-import Prelude
 import PortfolioTracker.HttpClient
+import Prelude
 
 main :: IO ()
 main = do
-  res <- sendRequest req
+  print "try to run rpc"
+  --print $ show req
+  res <- sendRequest --req
   print res
   putStrLn "Hello!!!"

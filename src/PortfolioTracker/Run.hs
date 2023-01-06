@@ -7,6 +7,6 @@ main :: IO ()
 main = do
   print "try to run rpc"
   --print $ show req
-  res <- sendRequest --req
+  res <- getPrice --req
   print res
   putStrLn "Hello!!!"

@@ -40,7 +40,8 @@ executable portfolio-tracker-exe
       DerivingStrategies
   ghc-options: -Werror -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -fenable-th-splice-warnings -fprint-potential-instances
   build-depends:
-      base >=4.15.1.0 && <4.16
+      aeson
+    , base >=4.15.1.0 && <4.16
     , bytestring
     , http-client
     , http-client-tls

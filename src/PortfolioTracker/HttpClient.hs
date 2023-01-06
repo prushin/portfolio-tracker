@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module PortfolioTracker.HttpClient
-  ( sendRequest,
+  ( getPrice,
   )
 where
 
@@ -9,36 +10,29 @@ import Network.HTTP.Client
 import Network.HTTP.Client.TLS
 import Network.HTTP.Types.Status (statusCode)
 import Prelude
+import Data.ByteString.Lazy
+import Data.Aeson (object, (.=), encode)
+import Data.Text (Text)
 
-sendRequest :: IO ()
-sendRequest = do
+data Api =
+  Ping | Price | Coins
+
+getApiPath :: Api -> String
+getApiPath api =
+  case api of
+    Ping -> "https://api.coingecko.com/api/v3/ping"
+    Price -> "https://api.coingecko.com/api/v3/simple/price"
+    Coins -> "https://api.coingecko.com/api/v3/coins/list"
+
+getPrice :: IO (Response ByteString)
+getPrice = do
+  initialRequest <- parseRequest $ getApiPath Price
+  let request = setQueryString [("ids", Just "bitcoin"), ("vs_currencies", Just "usd,eur")] initialRequest
+  print $ getUri request
+  sendRequest request
+
+sendRequest :: Request -> IO (Response ByteString)
+sendRequest req = do
   manager <- newManager tlsManagerSettings
-
-  request <- parseRequest "https://api.coingecko.com/api/v3/ping"
-  response <- httpLbs request manager
-  print response
-  pure ()
-
---sendRequest :: Request -> IO ()
---sendRequest req = do
---  runTCPClient serverName "443" runHTTP2Client
---  where
---    cliconf = ClientConfig "https" (C8.pack serverName) 20
---    runHTTP2Client s =
---      E.bracket
---        (allocSimpleConfig s 4096)
---        freeSimpleConfig
---        (\conf -> run cliconf conf client)
---    client :: Client ()
---    client sr = do
---      _ <- forkIO $
---        sr req $ \rsp -> do
---          print "=================="
---          print rsp
---          getResponseBodyChunk rsp >>= C8.putStrLn
---      sr req $ \rsp -> do
---        threadDelay 100000
---        print rsp
---        getResponseBodyChunk rsp >>= C8.putStrLn
---
---req = requestNoBody methodGet "/api/v3/ping" []
+  response <- httpLbs req manager
+  pure response

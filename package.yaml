@@ -91,6 +91,7 @@ executables:
     - text
     - http-client
     - http-client-tls
+    - aeson
     source-dirs:
     - app
     - src

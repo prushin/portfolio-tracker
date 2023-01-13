@@ -92,9 +92,40 @@ executables:
     - http-client
     - http-client-tls
     - aeson
+    - containers
+    - time
+    # storage
+    - persistent >= 2.13.2.1
+    - persistent-postgresql >= 2.13.2.1
+    - persistent-migration
+    - esqueleto >= 3.5.3
     source-dirs:
     - app
     - src
+
+tests:
+  portfolio-tracker-test:
+    main: Main.hs
+    dependencies:
+    - base ^>=4.15.1.0
+    - bytestring
+    - http-types
+    - text
+    - http-client
+    - http-client-tls
+    - aeson
+    - containers
+    - time
+    - hspec
+    - hspec-core
+    # storage
+    - persistent >= 2.13.2.1
+    - persistent-postgresql >= 2.13.2.1
+    - persistent-migration
+    - esqueleto >= 3.5.3
+    source-dirs:
+    - test
+
       #    ghc-options:
       #    - -O2
       #    - -optc-O3

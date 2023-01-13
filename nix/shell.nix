@@ -1,6 +1,10 @@
 { }:
 with (import ./project.nix);
-(project {}).shellFor {
+let
+  repoDir = builtins.toString ./..;
+  deps = import ./test-deps.nix {inherit repoDir;};
+in
+  (project {}).shellFor {
   withHoogle = true;
   buildInputs = [
 #    nixPkgsLegacy.cabal-install

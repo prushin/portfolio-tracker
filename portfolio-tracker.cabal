@@ -29,6 +29,7 @@ executable portfolio-tracker-exe
       PortfolioTracker.Data.Currency
       PortfolioTracker.HttpClient
       PortfolioTracker.Run
+      PortfolioTracker.Storage.Model
       Paths_portfolio_tracker
   hs-source-dirs:
       app
@@ -43,8 +44,47 @@ executable portfolio-tracker-exe
       aeson
     , base >=4.15.1.0 && <4.16
     , bytestring
+    , containers
+    , esqueleto >=3.5.3
     , http-client
     , http-client-tls
     , http-types
+    , persistent >=2.13.2.1
+    , persistent-migration
+    , persistent-postgresql >=2.13.2.1
     , text
+    , time
+  default-language: Haskell2010
+
+test-suite portfolio-tracker-test
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Spec
+      TestSpec
+      Paths_portfolio_tracker
+  hs-source-dirs:
+      test
+  default-extensions:
+      NoImplicitPrelude
+      OverloadedStrings
+      GeneralizedNewtypeDeriving
+      DerivingStrategies
+  ghc-options: -Werror -Wno-missing-exported-signatures -Wno-missing-import-lists -Wno-missed-specialisations -Wno-all-missed-specialisations -Wno-unsafe -Wno-safe -Wno-missing-local-signatures -Wno-missing-safe-haskell-mode -Wno-prepositive-qualified-module -fenable-th-splice-warnings -fprint-potential-instances
+  build-depends:
+      aeson
+    , base >=4.15.1.0 && <4.16
+    , bytestring
+    , containers
+    , esqueleto >=3.5.3
+    , hspec
+    , hspec-core
+    , http-client
+    , http-client-tls
+    , http-types
+    , persistent >=2.13.2.1
+    , persistent-migration
+    , persistent-postgresql >=2.13.2.1
+    , text
+    , time
   default-language: Haskell2010

@@ -1,0 +1,5 @@
+Coin
+  uid String
+  symbol String
+  name Text
+  (Unique uid)
